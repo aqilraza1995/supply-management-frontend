@@ -1,44 +1,50 @@
-import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Collapse from '@mui/material/Collapse';
-import Typography from '@mui/material/Typography';
-import Chip from '@mui/material/Chip';
-import Divider from '@mui/material/Divider';
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import Box from "@mui/material/Box";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Collapse from "@mui/material/Collapse";
+import Typography from "@mui/material/Typography";
+import Chip from "@mui/material/Chip";
+import Divider from "@mui/material/Divider";
 
 // Icons
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
-import Inventory2Icon from '@mui/icons-material/Inventory2';
-import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
-import PaymentsIcon from '@mui/icons-material/Payments';
-import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
-import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandMore from '@mui/icons-material/ExpandMore';
-import HubIcon from '@mui/icons-material/Hub';
-// import CompanyIcon from '@mui/icons-material/Store'
-// import AddCompany from '@mui/icons-material/AddBusiness'
-import {Store, AddBusiness, Dashboard, LocalShipping, Inventory, Receipt, Paid, Payment, AddCard} from '@mui/icons-material'
+import {
+  Store,
+  AddBusiness,
+  Dashboard,
+  LocalShipping,
+  Inventory,
+  Receipt,
+  Paid,
+  Payment,
+  AddCard,
+  FormatListBulleted,
+  AddCircleOutlined,
+  ReceiptLong,
+  ExpandLess,
+  ExpandMore,
+  Hub,
+} from "@mui/icons-material";
 
-import { ROUTES, APP_NAME } from '../../constants/appConstants';
+import { ROUTES, APP_NAME } from "../../constants/appConstants";
 
 export const Sidebar = ({ onNavigate }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
   // Collapsible groups
-  const isSuppliersActive = location.pathname.startsWith('/suppliers');
-  const isSuppliesActive = location.pathname.startsWith('/supplies');
-  const isPaymentsActive = location.pathname.startsWith('/payments');
-  const isThirdPartyPaymentsActive = location.pathname.startsWith('/third-party-payments');
-  const isAdvancePaymentActive = location.pathname.startsWith('/advance-payments');
+  const isSuppliersActive = location.pathname.startsWith("/suppliers");
+  const isSuppliesActive = location.pathname.startsWith("/supplies");
+  const isPaymentsActive = location.pathname.startsWith("/payments");
+  const isThirdPartyPaymentsActive = location.pathname.startsWith(
+    "/third-party-payments",
+  );
+  const isAdvancePaymentActive =
+    location.pathname.startsWith("/advance-payments");
 
   const [openSuppliers, setOpenSuppliers] = useState(true);
   const [openSupplies, setOpenSupplies] = useState(true);
@@ -62,10 +68,10 @@ export const Sidebar = ({ onNavigate }) => {
 
   const menuSections = [
     {
-      title: 'Main',
+      title: "Main",
       items: [
         {
-          label: 'Dashboard',
+          label: "Dashboard",
           icon: <Dashboard fontSize="small" />,
           path: ROUTES.DASHBOARD,
           active: isActive(ROUTES.DASHBOARD),
@@ -73,20 +79,20 @@ export const Sidebar = ({ onNavigate }) => {
       ],
     },
     {
-      title: 'Compinies',
+      title: "Compinies",
       open: openSuppliers,
       setOpen: setOpenSuppliers,
       active: isSuppliersActive,
       icon: <Store fontSize="small" />,
       subItems: [
         {
-          label: 'Company List',
-          icon: <FormatListBulletedIcon fontSize="small" />,
+          label: "Company List",
+          icon: <FormatListBulleted fontSize="small" />,
           path: ROUTES.SUPPLIERS,
           active: location.pathname === ROUTES.SUPPLIERS,
         },
         {
-          label: 'Add Company',
+          label: "Add Company",
           icon: <AddBusiness fontSize="small" />,
           path: ROUTES.SUPPLIERS_ADD,
           active: location.pathname === ROUTES.SUPPLIERS_ADD,
@@ -94,21 +100,21 @@ export const Sidebar = ({ onNavigate }) => {
       ],
     },
     {
-      title: 'Supply',
+      title: "Supply",
       open: openSupplies,
       setOpen: setOpenSupplies,
       active: isSuppliesActive,
       icon: <LocalShipping fontSize="small" />,
       subItems: [
         {
-          label: 'Supply List',
-          icon: <FormatListBulletedIcon fontSize="small" />,
+          label: "Supply List",
+          icon: <FormatListBulleted fontSize="small" />,
           path: ROUTES.SUPPLIES,
           active: location.pathname === ROUTES.SUPPLIES,
         },
         {
-          label: 'Add Supply',
-          // icon: <AddCircleOutlinedIcon fontSize="small" />,
+          label: "Add Supply",
+          // icon: <AddCircleOutlined fontSize="small" />,
           icon: <Inventory fontSize="small" />,
           path: ROUTES.SUPPLIES_ADD,
           active: location.pathname === ROUTES.SUPPLIES_ADD,
@@ -116,7 +122,7 @@ export const Sidebar = ({ onNavigate }) => {
       ],
     },
     {
-      title: 'Receive Payment',
+      title: "Receive Payment",
       open: openPayments,
       setOpen: setOpenPayments,
       active: isPaymentsActive,
@@ -124,56 +130,56 @@ export const Sidebar = ({ onNavigate }) => {
       icon: <Receipt fontSize="small" />,
       subItems: [
         {
-          label: 'Payment List',
-          // icon: <ReceiptLongIcon fontSize="small" />,
-          icon: <FormatListBulletedIcon fontSize="small" />,
+          label: "Payment List",
+          // icon: <ReceiptLong fontSize="small" />,
+          icon: <FormatListBulleted fontSize="small" />,
           path: ROUTES.PAYMENTS,
           active: location.pathname === ROUTES.PAYMENTS,
         },
         {
-          label: 'Add Payment',
-          icon: <AddCircleOutlinedIcon fontSize="small" />,
+          label: "Add Payment",
+          icon: <AddCircleOutlined fontSize="small" />,
           path: ROUTES.PAYMENTS_ADD,
           active: location.pathname === ROUTES.PAYMENTS_ADD,
         },
       ],
     },
     {
-      title: 'Third Party Payment',
+      title: "Third Party Payment",
       open: openThirdPayments,
       setOpen: setOpenThirdPayments,
       active: isThirdPartyPaymentsActive,
       icon: <Paid fontSize="small" />,
       subItems: [
         {
-          label: 'Third Party Payment List',
-          icon: <FormatListBulletedIcon fontSize="small" />,
+          label: "Third Party Payment List",
+          icon: <FormatListBulleted fontSize="small" />,
           path: ROUTES.PAYMENTS,
           active: location.pathname === ROUTES.PAYMENTS,
         },
         {
-          label: 'Add Third Party Payment',
-          icon: <ReceiptLongIcon fontSize="small" />,
+          label: "Add Third Party Payment",
+          icon: <ReceiptLong fontSize="small" />,
           path: ROUTES.PAYMENTS_ADD,
           active: location.pathname === ROUTES.PAYMENTS_ADD,
         },
       ],
     },
     {
-      title: 'Advance Payment',
+      title: "Advance Payment",
       open: openAdvancePayment,
       setOpen: setOpenAdvancePayment,
       active: isAdvancePaymentActive,
       icon: <Payment fontSize="small" />,
       subItems: [
         {
-          label: 'Advance Payment List',
-          icon: <FormatListBulletedIcon fontSize="small" />,
+          label: "Advance Payment List",
+          icon: <FormatListBulleted fontSize="small" />,
           path: ROUTES.PAYMENTS,
           active: location.pathname === ROUTES.PAYMENTS,
         },
         {
-          label: 'Add Advance Payment',
+          label: "Add Advance Payment",
           icon: <AddCard fontSize="small" />,
           path: ROUTES.PAYMENTS_ADD,
           active: location.pathname === ROUTES.PAYMENTS_ADD,
@@ -185,21 +191,21 @@ export const Sidebar = ({ onNavigate }) => {
   return (
     <Box
       sx={{
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        bgcolor: '#0F172A', // Deep slate navy
-        color: '#F8FAFC',
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        bgcolor: "#0F172A", // Deep slate navy
+        color: "#F8FAFC",
       }}
     >
       {/* Brand Header */}
       <Box
         sx={{
           p: 2.5,
-          display: 'flex',
-          alignItems: 'center',
+          display: "flex",
+          alignItems: "center",
           gap: 1.5,
-          borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+          borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
         }}
       >
         <Box
@@ -207,24 +213,24 @@ export const Sidebar = ({ onNavigate }) => {
             width: 38,
             height: 38,
             borderRadius: 2,
-            bgcolor: 'primary.main',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxShadow: '0 4px 12px rgba(37, 99, 235, 0.4)',
+            bgcolor: "primary.main",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            boxShadow: "0 4px 12px rgba(37, 99, 235, 0.4)",
           }}
         >
-          <HubIcon sx={{ color: '#FFFFFF', fontSize: 22 }} />
+          <Hub sx={{ color: "#FFFFFF", fontSize: 22 }} />
         </Box>
-        <Box sx={{ overflow: 'hidden' }}>
+        <Box sx={{ overflow: "hidden" }}>
           <Typography
             variant="subtitle1"
             sx={{
               fontWeight: 800,
-              color: '#FFFFFF',
-              letterSpacing: '-0.01em',
+              color: "#FFFFFF",
+              letterSpacing: "-0.01em",
               lineHeight: 1.2,
-              whiteSpace: 'nowrap',
+              whiteSpace: "nowrap",
             }}
           >
             Balraj Fisheries
@@ -232,11 +238,11 @@ export const Sidebar = ({ onNavigate }) => {
           <Typography
             variant="caption"
             sx={{
-              color: '#94A3B8',
-              fontSize: '0.6875rem',
+              color: "#94A3B8",
+              fontSize: "0.6875rem",
               fontWeight: 600,
-              textTransform: 'uppercase',
-              letterSpacing: '0.05em',
+              textTransform: "uppercase",
+              letterSpacing: "0.05em",
             }}
           >
             FIFO Settlement
@@ -245,7 +251,7 @@ export const Sidebar = ({ onNavigate }) => {
       </Box>
 
       {/* Navigation List */}
-      <Box sx={{ flex: 1, py: 2, px: 1.5, overflowY: 'auto' }}>
+      <Box sx={{ flex: 1, py: 2, px: 1.5, overflowY: "auto" }}>
         {/* Dashboard Link */}
         <List disablePadding sx={{ mb: 1.5 }}>
           <ListItem disablePadding>
@@ -256,19 +262,22 @@ export const Sidebar = ({ onNavigate }) => {
                 mb: 0.5,
                 px: 2,
                 py: 1.2,
-                bgcolor: isActive(ROUTES.DASHBOARD) ? 'primary.main' : 'transparent',
-                // color: isActive(ROUTES.DASHBOARD) ? '#FFFFFF' : '#94A3B8',
-                color: '#FFFFFF',
-                '&:hover': {
-                  bgcolor: isActive(ROUTES.DASHBOARD) ? 'primary.dark' : 'rgba(255, 255, 255, 0.05)',
-                  color: '#FFFFFF',
+                bgcolor: isActive(ROUTES.DASHBOARD)
+                  ? "primary.main"
+                  : "transparent",
+                color: isActive(ROUTES.DASHBOARD) ? "#FFFFFF" : "#94A3B8",
+                "&:hover": {
+                  bgcolor: isActive(ROUTES.DASHBOARD)
+                    ? "primary.dark"
+                    : "rgba(255, 255, 255, 0.05)",
+                  color: "#FFFFFF",
                 },
               }}
             >
               <ListItemIcon
                 sx={{
                   minWidth: 36,
-                  color: isActive(ROUTES.DASHBOARD) ? '#FFFFFF' : '#94A3B8',
+                  color: "#FFFFFF",
                 }}
               >
                 <Dashboard fontSize="small" />
@@ -276,7 +285,7 @@ export const Sidebar = ({ onNavigate }) => {
               <ListItemText
                 primary="Dashboard"
                 primaryTypographyProps={{
-                  fontSize: '0.875rem',
+                  fontSize: "0.875rem",
                   fontWeight: isActive(ROUTES.DASHBOARD) ? 700 : 500,
                 }}
               />
@@ -284,7 +293,7 @@ export const Sidebar = ({ onNavigate }) => {
           </ListItem>
         </List>
 
-        <Divider sx={{ borderColor: 'rgba(255, 255, 255, 0.06)', mb: 2 }} />
+        <Divider sx={{ borderColor: "rgba(255, 255, 255, 0.06)", mb: 2 }} />
 
         {/* Modular Groups */}
         {menuSections.slice(1).map((section) => (
@@ -295,18 +304,21 @@ export const Sidebar = ({ onNavigate }) => {
                 borderRadius: 2,
                 px: 2,
                 py: 1,
-                color: section.active ? '#FFFFFF' : '#CBD5E1',
-                bgcolor: section.active && !section.open ? 'rgba(37, 99, 235, 0.15)' : 'transparent',
-                '&:hover': {
-                  bgcolor: 'rgba(255, 255, 255, 0.05)',
-                  color: '#FFFFFF',
+                color: section.active ? "#FFFFFF" : "#CBD5E1",
+                bgcolor:
+                  section.active && !section.open
+                    ? "rgba(205, 213, 231, 0.15)"
+                    : "transparent",
+                "&:hover": {
+                  bgcolor: "rgba(255, 255, 255, 0.05)",
+                  color: "#FFFFFF",
                 },
               }}
             >
               <ListItemIcon
                 sx={{
                   minWidth: 36,
-                  color: section.active ? 'primary.light' : '#94A3B8',
+                  color: "#FFFFFF",
                 }}
               >
                 {section.icon}
@@ -314,15 +326,15 @@ export const Sidebar = ({ onNavigate }) => {
               <ListItemText
                 primary={section.title}
                 primaryTypographyProps={{
-                  fontSize: '0.875rem',
+                  fontSize: "0.875rem",
                   fontWeight: 700,
-                  letterSpacing: '0.01em',
+                  letterSpacing: "0.01em",
                 }}
               />
               {section.open ? (
-                <ExpandLess sx={{ fontSize: 18, color: '#94A3B8' }} />
+                <ExpandLess sx={{ fontSize: 18, color: "#FFFFFF" }} />
               ) : (
-                <ExpandMore sx={{ fontSize: 18, color: '#94A3B8' }} />
+                <ExpandMore sx={{ fontSize: 18, color: "#FFFFFF" }} />
               )}
             </ListItemButton>
 
@@ -337,19 +349,21 @@ export const Sidebar = ({ onNavigate }) => {
                         mb: 0.5,
                         px: 2,
                         py: 1,
-                        bgcolor: item.active ? 'primary.main' : 'transparent',
-                        color: item.active ? '#FFFFFF' : '#94A3B8',
-                        position: 'relative',
-                        '&:hover': {
-                          bgcolor: item.active ? 'primary.dark' : 'rgba(255, 255, 255, 0.05)',
-                          color: '#FFFFFF',
+                        bgcolor: item.active ? "primary.main" : "transparent",
+                        color: item.active ? "#FFFFFF" : "#94A3B8",
+                        position: "relative",
+                        "&:hover": {
+                          bgcolor: item.active
+                            ? "primary.dark"
+                            : "rgba(255, 255, 255, 0.05)",
+                          color: "#FFFFFF",
                         },
                       }}
                     >
                       <ListItemIcon
                         sx={{
                           minWidth: 32,
-                          color: item.active ? '#FFFFFF' : '#64748B',
+                          color: "#FFFFFF",
                         }}
                       >
                         {item.icon}
@@ -357,7 +371,7 @@ export const Sidebar = ({ onNavigate }) => {
                       <ListItemText
                         primary={item.label}
                         primaryTypographyProps={{
-                          fontSize: '0.8125rem',
+                          fontSize: "0.8125rem",
                           fontWeight: item.active ? 700 : 500,
                         }}
                       />
