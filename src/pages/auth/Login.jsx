@@ -113,7 +113,7 @@ export const Login = () => {
                 width: 52,
                 height: 52,
                 borderRadius: 3,
-                bgcolor: 'primary.main',
+                // bgcolor: 'primary.main',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -121,7 +121,8 @@ export const Login = () => {
                 boxShadow: '0 8px 16px rgba(37, 99, 235, 0.35)',
               }}
             >
-              <HubIcon sx={{ color: '#FFFFFF', fontSize: 30 }} />
+              <img src="./logo.png" alt="logo" style={{width:"152px", height:"80px"}}/>
+              {/* <HubIcon sx={{ color: '#FFFFFF', fontSize: 30 }} /> */}
             </Box>
             <Typography variant="h5" sx={{ fontWeight: 800, color: '#0F172A' }}>
               Supplier Management

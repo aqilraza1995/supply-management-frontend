@@ -114,7 +114,6 @@ export const Sidebar = ({ onNavigate }) => {
         },
         {
           label: "Add Supply",
-          // icon: <AddCircleOutlined fontSize="small" />,
           icon: <Inventory fontSize="small" />,
           path: ROUTES.SUPPLIES_ADD,
           active: location.pathname === ROUTES.SUPPLIES_ADD,
@@ -126,12 +125,10 @@ export const Sidebar = ({ onNavigate }) => {
       open: openPayments,
       setOpen: setOpenPayments,
       active: isPaymentsActive,
-      // icon: <PaymentsIcon fontSize="small" />,
       icon: <Receipt fontSize="small" />,
       subItems: [
         {
           label: "Payment List",
-          // icon: <ReceiptLong fontSize="small" />,
           icon: <FormatListBulleted fontSize="small" />,
           path: ROUTES.PAYMENTS,
           active: location.pathname === ROUTES.PAYMENTS,
@@ -213,14 +210,15 @@ export const Sidebar = ({ onNavigate }) => {
             width: 38,
             height: 38,
             borderRadius: 2,
-            bgcolor: "primary.main",
+            // bgcolor: "primary.main",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             boxShadow: "0 4px 12px rgba(37, 99, 235, 0.4)",
           }}
         >
-          <Hub sx={{ color: "#FFFFFF", fontSize: 22 }} />
+          <img src="./logo.png" alt="logo" style={{width:"92px", height:"50px"}}/>
+          {/* <Hub sx={{ color: "#FFFFFF", fontSize: 22 }} /> */}
         </Box>
         <Box sx={{ overflow: "hidden" }}>
           <Typography
@@ -234,18 +232,6 @@ export const Sidebar = ({ onNavigate }) => {
             }}
           >
             Balraj Fisheries
-          </Typography>
-          <Typography
-            variant="caption"
-            sx={{
-              color: "#94A3B8",
-              fontSize: "0.6875rem",
-              fontWeight: 600,
-              textTransform: "uppercase",
-              letterSpacing: "0.05em",
-            }}
-          >
-            FIFO Settlement
           </Typography>
         </Box>
       </Box>

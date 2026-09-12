@@ -121,7 +121,7 @@ export const Dashboard = () => {
       </Grid>
 
       {/* Financial Health Summary Banner */}
-      <AppCard sx={{ mb: 4 }}>
+      {/* <AppCard sx={{ mb: 4 }}>
         <Grid container spacing={3} alignItems="center">
           <Grid size={{ xs: 12, md: 4 }}>
             <Box>
@@ -161,12 +161,13 @@ export const Dashboard = () => {
             </Box>
           </Grid>
         </Grid>
-      </AppCard>
+      </AppCard> */}
 
       {/* Tables Section: Top Outstanding & Recent Activity */}
       <Grid container spacing={3}>
         {/* Top Suppliers with Outstanding Balances */}
-        <Grid size={{ xs: 12, lg: 6 }}>
+        {/* <Grid size={{ xs: 12, lg: 6 }}> */}
+        <Grid size={{ xs: 12 }}>
           <AppCard
             title="Suppliers with Outstanding Balance"
             subheader="Suppliers with remaining dues ordered by amount"
@@ -240,7 +241,8 @@ export const Dashboard = () => {
         </Grid>
 
         {/* Recent Supplies */}
-        <Grid size={{ xs: 12, lg: 6 }}>
+        {/* <Grid size={{ xs: 12, lg: 6 }}> */}
+        <Grid size={{ xs: 12 }}>
           <AppCard
             title="Recent Supplies"
             subheader="Latest shipments and goods received"
