@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
@@ -6,54 +6,27 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import Collapse from "@mui/material/Collapse";
 import Typography from "@mui/material/Typography";
-import Chip from "@mui/material/Chip";
 import Divider from "@mui/material/Divider";
 
-// Icons
 import {
   Store,
-  AddBusiness,
   Dashboard,
   LocalShipping,
-  Inventory,
   Receipt,
   Paid,
   Payment,
-  AddCard,
-  FormatListBulleted,
-  AddCircleOutlined,
-  ReceiptLong,
-  ExpandLess,
-  ExpandMore,
-  Hub,
 } from "@mui/icons-material";
 
-import { ROUTES, APP_NAME } from "../../constants/appConstants";
+import { ROUTES } from "../../constants/appConstants";
 
 export const Sidebar = ({ onNavigate }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Collapsible groups
-  const isSuppliersActive = location.pathname.startsWith("/suppliers");
-  const isSuppliesActive = location.pathname.startsWith("/supplies");
-  const isPaymentsActive = location.pathname.startsWith("/payments");
-  const isThirdPartyPaymentsActive = location.pathname.startsWith(
-    "/third-party-payments",
-  );
-  const isAdvancePaymentActive =
-    location.pathname.startsWith("/advance-payments");
-
-  const [openSuppliers, setOpenSuppliers] = useState(true);
-  const [openSupplies, setOpenSupplies] = useState(true);
-  const [openPayments, setOpenPayments] = useState(true);
-  const [openThirdPayments, setOpenThirdPayments] = useState(true);
-  const [openAdvancePayment, setOpenAdvancePayment] = useState(true);
-
   const handleNav = (path) => {
     navigate(path);
+
     if (onNavigate) {
       onNavigate();
     }
@@ -63,125 +36,40 @@ export const Sidebar = ({ onNavigate }) => {
     if (path === ROUTES.DASHBOARD) {
       return location.pathname === ROUTES.DASHBOARD;
     }
-    return location.pathname === path;
+
+    return location.pathname.startsWith(path);
   };
 
-  const menuSections = [
+  const menuItems = [
     {
-      title: "Main",
-      items: [
-        {
-          label: "Dashboard",
-          icon: <Dashboard fontSize="small" />,
-          path: ROUTES.DASHBOARD,
-          active: isActive(ROUTES.DASHBOARD),
-        },
-      ],
+      label: "Dashboard",
+      icon: <Dashboard fontSize="small" />,
+      path: ROUTES.DASHBOARD,
     },
     {
-      title: "Compinies",
-      open: openSuppliers,
-      setOpen: setOpenSuppliers,
-      active: isSuppliersActive,
+      label: "Companies",
       icon: <Store fontSize="small" />,
-      subItems: [
-        {
-          label: "Company List",
-          icon: <FormatListBulleted fontSize="small" />,
-          path: ROUTES.SUPPLIERS,
-          active: location.pathname === ROUTES.SUPPLIERS,
-        },
-        {
-          label: "Add Company",
-          icon: <AddBusiness fontSize="small" />,
-          path: ROUTES.SUPPLIERS_ADD,
-          active: location.pathname === ROUTES.SUPPLIERS_ADD,
-        },
-      ],
+      path: ROUTES.SUPPLIERS,
     },
     {
-      title: "Supply",
-      open: openSupplies,
-      setOpen: setOpenSupplies,
-      active: isSuppliesActive,
+      label: "Supply",
       icon: <LocalShipping fontSize="small" />,
-      subItems: [
-        {
-          label: "Supply List",
-          icon: <FormatListBulleted fontSize="small" />,
-          path: ROUTES.SUPPLIES,
-          active: location.pathname === ROUTES.SUPPLIES,
-        },
-        {
-          label: "Add Supply",
-          icon: <Inventory fontSize="small" />,
-          path: ROUTES.SUPPLIES_ADD,
-          active: location.pathname === ROUTES.SUPPLIES_ADD,
-        },
-      ],
+      path: ROUTES.SUPPLIES,
     },
     {
-      title: "Receive Payment",
-      open: openPayments,
-      setOpen: setOpenPayments,
-      active: isPaymentsActive,
+      label: "Receive Payment",
       icon: <Receipt fontSize="small" />,
-      subItems: [
-        {
-          label: "Payment List",
-          icon: <FormatListBulleted fontSize="small" />,
-          path: ROUTES.PAYMENTS,
-          active: location.pathname === ROUTES.PAYMENTS,
-        },
-        {
-          label: "Add Payment",
-          icon: <AddCircleOutlined fontSize="small" />,
-          path: ROUTES.PAYMENTS_ADD,
-          active: location.pathname === ROUTES.PAYMENTS_ADD,
-        },
-      ],
+      path: ROUTES.PAYMENTS,
     },
     {
-      title: "Third Party Payment",
-      open: openThirdPayments,
-      setOpen: setOpenThirdPayments,
-      active: isThirdPartyPaymentsActive,
+      label: "Third Party Payment",
       icon: <Paid fontSize="small" />,
-      subItems: [
-        {
-          label: "Third Party Payment List",
-          icon: <FormatListBulleted fontSize="small" />,
-          path: ROUTES.PAYMENTS,
-          active: location.pathname === ROUTES.PAYMENTS,
-        },
-        {
-          label: "Add Third Party Payment",
-          icon: <ReceiptLong fontSize="small" />,
-          path: ROUTES.PAYMENTS_ADD,
-          active: location.pathname === ROUTES.PAYMENTS_ADD,
-        },
-      ],
+      path: ROUTES.THIRD_PARTY_PAYMENTS,
     },
     {
-      title: "Advance Payment",
-      open: openAdvancePayment,
-      setOpen: setOpenAdvancePayment,
-      active: isAdvancePaymentActive,
+      label: "Advance Payment",
       icon: <Payment fontSize="small" />,
-      subItems: [
-        {
-          label: "Advance Payment List",
-          icon: <FormatListBulleted fontSize="small" />,
-          path: ROUTES.PAYMENTS,
-          active: location.pathname === ROUTES.PAYMENTS,
-        },
-        {
-          label: "Add Advance Payment",
-          icon: <AddCard fontSize="small" />,
-          path: ROUTES.PAYMENTS_ADD,
-          active: location.pathname === ROUTES.PAYMENTS_ADD,
-        },
-      ],
+      path: ROUTES.ADVANCE_PAYMENTS,
     },
   ];
 
@@ -191,7 +79,7 @@ export const Sidebar = ({ onNavigate }) => {
         height: "100%",
         display: "flex",
         flexDirection: "column",
-        bgcolor: "#0F172A", // Deep slate navy
+        bgcolor: "#0F172A",
         color: "#F8FAFC",
       }}
     >
@@ -210,16 +98,23 @@ export const Sidebar = ({ onNavigate }) => {
             width: 38,
             height: 38,
             borderRadius: 2,
-            // bgcolor: "primary.main",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             boxShadow: "0 4px 12px rgba(37, 99, 235, 0.4)",
           }}
         >
-          <img src="./logo.png" alt="logo" style={{width:"92px", height:"50px"}}/>
-          {/* <Hub sx={{ color: "#FFFFFF", fontSize: 22 }} /> */}
+          <img
+            src="./logo.png"
+            alt="logo"
+            style={{
+              width: "92px",
+              height: "50px",
+              objectFit: "contain",
+            }}
+          />
         </Box>
+
         <Box sx={{ overflow: "hidden" }}>
           <Typography
             variant="subtitle1"
@@ -236,141 +131,449 @@ export const Sidebar = ({ onNavigate }) => {
         </Box>
       </Box>
 
-      {/* Navigation List */}
-      <Box sx={{ flex: 1, py: 2, px: 1.5, overflowY: "auto" }}>
-        {/* Dashboard Link */}
-        <List disablePadding sx={{ mb: 1.5 }}>
-          <ListItem disablePadding>
-            <ListItemButton
-              onClick={() => handleNav(ROUTES.DASHBOARD)}
-              sx={{
-                borderRadius: 2,
-                mb: 0.5,
-                px: 2,
-                py: 1.2,
-                bgcolor: isActive(ROUTES.DASHBOARD)
-                  ? "primary.main"
-                  : "transparent",
-                color: isActive(ROUTES.DASHBOARD) ? "#FFFFFF" : "#94A3B8",
-                "&:hover": {
-                  bgcolor: isActive(ROUTES.DASHBOARD)
-                    ? "primary.dark"
-                    : "rgba(255, 255, 255, 0.05)",
-                  color: "#FFFFFF",
-                },
-              }}
-            >
-              <ListItemIcon
+      {/* Navigation */}
+      <Box
+        sx={{
+          flex: 1,
+          py: 2,
+          px: 1.5,
+          overflowY: "auto",
+        }}
+      >
+        <List disablePadding>
+          {menuItems.map((item) => {
+            const active = isActive(item.path);
+
+            return (
+              <ListItem
+                disablePadding
+                key={item.label}
                 sx={{
-                  minWidth: 36,
-                  color: "#FFFFFF",
+                  mb: 0.7,
                 }}
               >
-                <Dashboard fontSize="small" />
-              </ListItemIcon>
-              <ListItemText
-                primary="Dashboard"
-                primaryTypographyProps={{
-                  fontSize: "0.875rem",
-                  fontWeight: isActive(ROUTES.DASHBOARD) ? 700 : 500,
-                }}
-              />
-            </ListItemButton>
-          </ListItem>
+                <ListItemButton
+                  onClick={() => handleNav(item.path)}
+                  sx={{
+                    borderRadius: 2,
+                    px: 2,
+                    py: 1.2,
+                    bgcolor: active ? "primary.main" : "transparent",
+                    color: active ? "#FFFFFF" : "#94A3B8",
+                    "&:hover": {
+                      bgcolor: active
+                        ? "primary.dark"
+                        : "rgba(255, 255, 255, 0.05)",
+                      color: "#FFFFFF",
+                    },
+                  }}
+                >
+                  <ListItemIcon sx={{ minWidth: 36, color: "#FFFFFF" }}>
+                    {item.icon}
+                  </ListItemIcon>
+                  
+                  <ListItemText
+                    primary={item.label}
+                    sx={{
+                      "& .MuiListItemText-primary": {
+                        color: "#FFFFFF",
+                        fontSize: "0.875rem",
+                        fontWeight: active ? 700 : 500,
+                      },
+                    }}
+                  />
+                </ListItemButton>
+              </ListItem>
+            );
+          })}
         </List>
 
-        <Divider sx={{ borderColor: "rgba(255, 255, 255, 0.06)", mb: 2 }} />
-
-        {/* Modular Groups */}
-        {menuSections.slice(1).map((section) => (
-          <Box key={section.title} sx={{ mb: 1.5 }}>
-            <ListItemButton
-              onClick={() => section.setOpen(!section.open)}
-              sx={{
-                borderRadius: 2,
-                px: 2,
-                py: 1,
-                color: section.active ? "#FFFFFF" : "#CBD5E1",
-                bgcolor:
-                  section.active && !section.open
-                    ? "rgba(205, 213, 231, 0.15)"
-                    : "transparent",
-                "&:hover": {
-                  bgcolor: "rgba(255, 255, 255, 0.05)",
-                  color: "#FFFFFF",
-                },
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 36,
-                  color: "#FFFFFF",
-                }}
-              >
-                {section.icon}
-              </ListItemIcon>
-              <ListItemText
-                primary={section.title}
-                primaryTypographyProps={{
-                  fontSize: "0.875rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.01em",
-                }}
-              />
-              {section.open ? (
-                <ExpandLess sx={{ fontSize: 18, color: "#FFFFFF" }} />
-              ) : (
-                <ExpandMore sx={{ fontSize: 18, color: "#FFFFFF" }} />
-              )}
-            </ListItemButton>
-
-            <Collapse in={section.open} timeout="auto" unmountOnExit>
-              <List component="div" disablePadding sx={{ pl: 2, pt: 0.5 }}>
-                {section.subItems.map((item) => (
-                  <ListItem disablePadding key={item.path}>
-                    <ListItemButton
-                      onClick={() => handleNav(item.path)}
-                      sx={{
-                        borderRadius: 2,
-                        mb: 0.5,
-                        px: 2,
-                        py: 1,
-                        bgcolor: item.active ? "primary.main" : "transparent",
-                        color: item.active ? "#FFFFFF" : "#94A3B8",
-                        position: "relative",
-                        "&:hover": {
-                          bgcolor: item.active
-                            ? "primary.dark"
-                            : "rgba(255, 255, 255, 0.05)",
-                          color: "#FFFFFF",
-                        },
-                      }}
-                    >
-                      <ListItemIcon
-                        sx={{
-                          minWidth: 32,
-                          color: "#FFFFFF",
-                        }}
-                      >
-                        {item.icon}
-                      </ListItemIcon>
-                      <ListItemText
-                        primary={item.label}
-                        primaryTypographyProps={{
-                          fontSize: "0.8125rem",
-                          fontWeight: item.active ? 700 : 500,
-                        }}
-                      />
-                    </ListItemButton>
-                  </ListItem>
-                ))}
-              </List>
-            </Collapse>
-          </Box>
-        ))}
+        <Divider
+          sx={{
+            borderColor: "rgba(255, 255, 255, 0.06)",
+            mt: 1,
+          }}
+        />
       </Box>
     </Box>
   );
 };
 
 export default Sidebar;
+
+// import React, { useState } from "react";
+// import { useLocation, useNavigate } from "react-router-dom";
+// import Box from "@mui/material/Box";
+// import List from "@mui/material/List";
+// import ListItem from "@mui/material/ListItem";
+// import ListItemButton from "@mui/material/ListItemButton";
+// import ListItemIcon from "@mui/material/ListItemIcon";
+// import ListItemText from "@mui/material/ListItemText";
+// import Collapse from "@mui/material/Collapse";
+// import Typography from "@mui/material/Typography";
+// import Chip from "@mui/material/Chip";
+// import Divider from "@mui/material/Divider";
+
+// // Icons
+// import {
+//   Store,
+//   AddBusiness,
+//   Dashboard,
+//   LocalShipping,
+//   Inventory,
+//   Receipt,
+//   Paid,
+//   Payment,
+//   AddCard,
+//   FormatListBulleted,
+//   AddCircleOutlined,
+//   ReceiptLong,
+//   ExpandLess,
+//   ExpandMore,
+//   Hub,
+// } from "@mui/icons-material";
+
+// import { ROUTES, APP_NAME } from "../../constants/appConstants";
+
+// export const Sidebar = ({ onNavigate }) => {
+//   const location = useLocation();
+//   const navigate = useNavigate();
+
+//   // Collapsible groups
+//   const isSuppliersActive = location.pathname.startsWith("/suppliers");
+//   const isSuppliesActive = location.pathname.startsWith("/supplies");
+//   const isPaymentsActive = location.pathname.startsWith("/payments");
+//   const isThirdPartyPaymentsActive = location.pathname.startsWith(
+//     "/third-party-payments",
+//   );
+//   const isAdvancePaymentActive =
+//     location.pathname.startsWith("/advance-payments");
+
+//   const [openSuppliers, setOpenSuppliers] = useState(true);
+//   const [openSupplies, setOpenSupplies] = useState(true);
+//   const [openPayments, setOpenPayments] = useState(true);
+//   const [openThirdPayments, setOpenThirdPayments] = useState(true);
+//   const [openAdvancePayment, setOpenAdvancePayment] = useState(true);
+
+//   const handleNav = (path) => {
+//     navigate(path);
+//     if (onNavigate) {
+//       onNavigate();
+//     }
+//   };
+
+//   const isActive = (path) => {
+//     if (path === ROUTES.DASHBOARD) {
+//       return location.pathname === ROUTES.DASHBOARD;
+//     }
+//     return location.pathname === path;
+//   };
+
+//   const menuSections = [
+//     {
+//       title: "Main",
+//       items: [
+//         {
+//           label: "Dashboard",
+//           icon: <Dashboard fontSize="small" />,
+//           path: ROUTES.DASHBOARD,
+//           active: isActive(ROUTES.DASHBOARD),
+//         },
+//       ],
+//     },
+//     {
+//       title: "Compinies",
+//       open: openSuppliers,
+//       setOpen: setOpenSuppliers,
+//       active: isSuppliersActive,
+//       icon: <Store fontSize="small" />,
+//       subItems: [
+//         {
+//           label: "Company List",
+//           icon: <FormatListBulleted fontSize="small" />,
+//           path: ROUTES.SUPPLIERS,
+//           active: location.pathname === ROUTES.SUPPLIERS,
+//         },
+//         {
+//           label: "Add Company",
+//           icon: <AddBusiness fontSize="small" />,
+//           path: ROUTES.SUPPLIERS_ADD,
+//           active: location.pathname === ROUTES.SUPPLIERS_ADD,
+//         },
+//       ],
+//     },
+//     {
+//       title: "Supply",
+//       open: openSupplies,
+//       setOpen: setOpenSupplies,
+//       active: isSuppliesActive,
+//       icon: <LocalShipping fontSize="small" />,
+//       subItems: [
+//         {
+//           label: "Supply List",
+//           icon: <FormatListBulleted fontSize="small" />,
+//           path: ROUTES.SUPPLIES,
+//           active: location.pathname === ROUTES.SUPPLIES,
+//         },
+//         {
+//           label: "Add Supply",
+//           icon: <Inventory fontSize="small" />,
+//           path: ROUTES.SUPPLIES_ADD,
+//           active: location.pathname === ROUTES.SUPPLIES_ADD,
+//         },
+//       ],
+//     },
+//     {
+//       title: "Receive Payment",
+//       open: openPayments,
+//       setOpen: setOpenPayments,
+//       active: isPaymentsActive,
+//       icon: <Receipt fontSize="small" />,
+//       subItems: [
+//         {
+//           label: "Payment List",
+//           icon: <FormatListBulleted fontSize="small" />,
+//           path: ROUTES.PAYMENTS,
+//           active: location.pathname === ROUTES.PAYMENTS,
+//         },
+//         {
+//           label: "Add Payment",
+//           icon: <AddCircleOutlined fontSize="small" />,
+//           path: ROUTES.PAYMENTS_ADD,
+//           active: location.pathname === ROUTES.PAYMENTS_ADD,
+//         },
+//       ],
+//     },
+//     {
+//       title: "Third Party Payment",
+//       open: openThirdPayments,
+//       setOpen: setOpenThirdPayments,
+//       active: isThirdPartyPaymentsActive,
+//       icon: <Paid fontSize="small" />,
+//       subItems: [
+//         {
+//           label: "Third Party Payment List",
+//           icon: <FormatListBulleted fontSize="small" />,
+//           path: ROUTES.PAYMENTS,
+//           active: location.pathname === ROUTES.PAYMENTS,
+//         },
+//         {
+//           label: "Add Third Party Payment",
+//           icon: <ReceiptLong fontSize="small" />,
+//           path: ROUTES.PAYMENTS_ADD,
+//           active: location.pathname === ROUTES.PAYMENTS_ADD,
+//         },
+//       ],
+//     },
+//     {
+//       title: "Advance Payment",
+//       open: openAdvancePayment,
+//       setOpen: setOpenAdvancePayment,
+//       active: isAdvancePaymentActive,
+//       icon: <Payment fontSize="small" />,
+//       subItems: [
+//         {
+//           label: "Advance Payment List",
+//           icon: <FormatListBulleted fontSize="small" />,
+//           path: ROUTES.PAYMENTS,
+//           active: location.pathname === ROUTES.PAYMENTS,
+//         },
+//         {
+//           label: "Add Advance Payment",
+//           icon: <AddCard fontSize="small" />,
+//           path: ROUTES.PAYMENTS_ADD,
+//           active: location.pathname === ROUTES.PAYMENTS_ADD,
+//         },
+//       ],
+//     },
+//   ];
+
+//   return (
+//     <Box
+//       sx={{
+//         height: "100%",
+//         display: "flex",
+//         flexDirection: "column",
+//         bgcolor: "#0F172A", // Deep slate navy
+//         color: "#F8FAFC",
+//       }}
+//     >
+//       {/* Brand Header */}
+//       <Box
+//         sx={{
+//           p: 2.5,
+//           display: "flex",
+//           alignItems: "center",
+//           gap: 1.5,
+//           borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+//         }}
+//       >
+//         <Box
+//           sx={{
+//             width: 38,
+//             height: 38,
+//             borderRadius: 2,
+//             // bgcolor: "primary.main",
+//             display: "flex",
+//             alignItems: "center",
+//             justifyContent: "center",
+//             boxShadow: "0 4px 12px rgba(37, 99, 235, 0.4)",
+//           }}
+//         >
+//           <img src="./logo.png" alt="logo" style={{width:"92px", height:"50px"}}/>
+//           {/* <Hub sx={{ color: "#FFFFFF", fontSize: 22 }} /> */}
+//         </Box>
+//         <Box sx={{ overflow: "hidden" }}>
+//           <Typography
+//             variant="subtitle1"
+//             sx={{
+//               fontWeight: 800,
+//               color: "#FFFFFF",
+//               letterSpacing: "-0.01em",
+//               lineHeight: 1.2,
+//               whiteSpace: "nowrap",
+//             }}
+//           >
+//             Balraj Fisheries
+//           </Typography>
+//         </Box>
+//       </Box>
+
+//       {/* Navigation List */}
+//       <Box sx={{ flex: 1, py: 2, px: 1.5, overflowY: "auto" }}>
+//         {/* Dashboard Link */}
+//         <List disablePadding sx={{ mb: 1.5 }}>
+//           <ListItem disablePadding>
+//             <ListItemButton
+//               onClick={() => handleNav(ROUTES.DASHBOARD)}
+//               sx={{
+//                 borderRadius: 2,
+//                 mb: 0.5,
+//                 px: 2,
+//                 py: 1.2,
+//                 bgcolor: isActive(ROUTES.DASHBOARD)
+//                   ? "primary.main"
+//                   : "transparent",
+//                 color: isActive(ROUTES.DASHBOARD) ? "#FFFFFF" : "#94A3B8",
+//                 "&:hover": {
+//                   bgcolor: isActive(ROUTES.DASHBOARD)
+//                     ? "primary.dark"
+//                     : "rgba(255, 255, 255, 0.05)",
+//                   color: "#FFFFFF",
+//                 },
+//               }}
+//             >
+//               <ListItemIcon
+//                 sx={{
+//                   minWidth: 36,
+//                   color: "#FFFFFF",
+//                 }}
+//               >
+//                 <Dashboard fontSize="small" />
+//               </ListItemIcon>
+//               <ListItemText
+//                 primary="Dashboard"
+//                 primaryTypographyProps={{
+//                   fontSize: "0.875rem",
+//                   fontWeight: isActive(ROUTES.DASHBOARD) ? 700 : 500,
+//                 }}
+//               />
+//             </ListItemButton>
+//           </ListItem>
+//         </List>
+
+//         <Divider sx={{ borderColor: "rgba(255, 255, 255, 0.06)", mb: 2 }} />
+
+//         {/* Modular Groups */}
+//         {menuSections.slice(1).map((section) => (
+//           <Box key={section.title} sx={{ mb: 1.5 }}>
+//             <ListItemButton
+//               onClick={() => section.setOpen(!section.open)}
+//               sx={{
+//                 borderRadius: 2,
+//                 px: 2,
+//                 py: 1,
+//                 color: section.active ? "#FFFFFF" : "#CBD5E1",
+//                 bgcolor:
+//                   section.active && !section.open
+//                     ? "rgba(205, 213, 231, 0.15)"
+//                     : "transparent",
+//                 "&:hover": {
+//                   bgcolor: "rgba(255, 255, 255, 0.05)",
+//                   color: "#FFFFFF",
+//                 },
+//               }}
+//             >
+//               <ListItemIcon
+//                 sx={{
+//                   minWidth: 36,
+//                   color: "#FFFFFF",
+//                 }}
+//               >
+//                 {section.icon}
+//               </ListItemIcon>
+//               <ListItemText
+//                 primary={section.title}
+//                 primaryTypographyProps={{
+//                   fontSize: "0.875rem",
+//                   fontWeight: 700,
+//                   letterSpacing: "0.01em",
+//                 }}
+//               />
+//               {section.open ? (
+//                 <ExpandLess sx={{ fontSize: 18, color: "#FFFFFF" }} />
+//               ) : (
+//                 <ExpandMore sx={{ fontSize: 18, color: "#FFFFFF" }} />
+//               )}
+//             </ListItemButton>
+
+//             <Collapse in={section.open} timeout="auto" unmountOnExit>
+//               <List component="div" disablePadding sx={{ pl: 2, pt: 0.5 }}>
+//                 {section.subItems.map((item) => (
+//                   <ListItem disablePadding key={item.path}>
+//                     <ListItemButton
+//                       onClick={() => handleNav(item.path)}
+//                       sx={{
+//                         borderRadius: 2,
+//                         mb: 0.5,
+//                         px: 2,
+//                         py: 1,
+//                         bgcolor: item.active ? "primary.main" : "transparent",
+//                         color: item.active ? "#FFFFFF" : "#94A3B8",
+//                         position: "relative",
+//                         "&:hover": {
+//                           bgcolor: item.active
+//                             ? "primary.dark"
+//                             : "rgba(255, 255, 255, 0.05)",
+//                           color: "#FFFFFF",
+//                         },
+//                       }}
+//                     >
+//                       <ListItemIcon
+//                         sx={{
+//                           minWidth: 32,
+//                           color: "#FFFFFF",
+//                         }}
+//                       >
+//                         {item.icon}
+//                       </ListItemIcon>
+//                       <ListItemText
+//                         primary={item.label}
+//                         primaryTypographyProps={{
+//                           fontSize: "0.8125rem",
+//                           fontWeight: item.active ? 700 : 500,
+//                         }}
+//                       />
+//                     </ListItemButton>
+//                   </ListItem>
+//                 ))}
+//               </List>
+//             </Collapse>
+//           </Box>
+//         ))}
+//       </Box>
+//     </Box>
+//   );
+// };
+
+// export default Sidebar;
