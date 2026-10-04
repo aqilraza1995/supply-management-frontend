@@ -27,7 +27,7 @@ export const calculateDashboardStats = (suppliers = [], supplies = [], payments 
 
   // Remaining total amount (must equal sum of all suppliers' remaining amounts)
   let totalRemainingAmount = 0;
-  let suppliersWithRemainingCount = 0;
+  let companiesWithRemainingCount = 0;
   let suppliersFullyClearedCount = 0;
 
   suppliers.forEach((supplier) => {
@@ -37,7 +37,7 @@ export const calculateDashboardStats = (suppliers = [], supplies = [], payments 
     
     if (ledger.totalRemaining > 0) {
       totalRemainingAmount += ledger.totalRemaining;
-      suppliersWithRemainingCount += 1;
+      companiesWithRemainingCount += 1;
     } else if (supplierSupplies.length > 0) {
       suppliersFullyClearedCount += 1;
     }
@@ -55,7 +55,7 @@ export const calculateDashboardStats = (suppliers = [], supplies = [], payments 
     totalSupplyAmount,
     totalPaidAmount,
     clearanceRate,
-    suppliersWithRemainingCount,
+    companiesWithRemainingCount,
     suppliersFullyClearedCount,
   };
 };

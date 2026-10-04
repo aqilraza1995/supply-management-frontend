@@ -42,15 +42,15 @@ export const AddPayment = () => {
   const [searchParams] = useSearchParams();
   const preselectedSupplierId = searchParams.get('supplierId');
 
-  const { enrichedSuppliers } = useSuppliers();
+  const { enrichedCompanies } = useSuppliers();
   const { addPayment, getSupplierSummary, calculatePaymentPreview } = usePayments();
   const { notifySuccess, notifyError } = useSnackbar();
 
   // Find preselected supplier if query param passed
   const initialSupplier = useMemo(() => {
     if (!preselectedSupplierId) return null;
-    return enrichedSuppliers.find((s) => String(s.id) === String(preselectedSupplierId)) || null;
-  }, [preselectedSupplierId, enrichedSuppliers]);
+    return enrichedCompanies.find((s) => String(s.id) === String(preselectedSupplierId)) || null;
+  }, [preselectedSupplierId, enrichedCompanies]);
 
   // Form State
   const [selectedSupplier, setSelectedSupplier] = useState(initialSupplier);
@@ -164,7 +164,7 @@ export const AddPayment = () => {
               {/* Supplier Selection Autocomplete */}
               <Grid size={{ xs: 12 }}>
                 <AppAutocomplete
-                  options={enrichedSuppliers}
+                  options={enrichedCompanies}
                   value={selectedSupplier}
                   onChange={(val) => {
                     setSelectedSupplier(val);

@@ -9,7 +9,7 @@ const supplierSlice = createSlice({
   name: 'suppliers',
   initialState,
   reducers: {
-    addSupplier: (state, action) => {
+    addCompany: (state, action) => {
       const now = new Date().toISOString();
       const newSupplier = {
         id: `sup-${Date.now()}`,
@@ -22,7 +22,7 @@ const supplierSlice = createSlice({
       };
       state.items.unshift(newSupplier);
     },
-    updateSupplier: (state, action) => {
+    updateCompany: (state, action) => {
       const { id, name, phone, email, address } = action.payload;
       const index = state.items.findIndex((s) => s.id === id);
       if (index !== -1) {
@@ -36,13 +36,13 @@ const supplierSlice = createSlice({
         };
       }
     },
-    deleteSupplier: (state, action) => {
+    deleteCompany: (state, action) => {
       state.items = state.items.filter((s) => s.id !== action.payload);
     },
   },
 });
 
-export const { addSupplier, updateSupplier, deleteSupplier } = supplierSlice.actions;
+export const { addCompany, updateCompany, deleteCompany } = supplierSlice.actions;
 
 export const selectAllSuppliers = (state) => state.suppliers.items;
 

@@ -49,7 +49,7 @@ export const Sidebar = ({ onNavigate }) => {
     {
       label: "Companies",
       icon: <Store fontSize="small" />,
-      path: ROUTES.SUPPLIERS,
+      path: ROUTES.COMPANIES,
     },
     {
       label: "Supply",
@@ -171,7 +171,7 @@ export const Sidebar = ({ onNavigate }) => {
                   <ListItemIcon sx={{ minWidth: 36, color: "#FFFFFF" }}>
                     {item.icon}
                   </ListItemIcon>
-                  
+
                   <ListItemText
                     primary={item.label}
                     sx={{
@@ -297,8 +297,8 @@ export default Sidebar;
 //         {
 //           label: "Add Company",
 //           icon: <AddBusiness fontSize="small" />,
-//           path: ROUTES.SUPPLIERS_ADD,
-//           active: location.pathname === ROUTES.SUPPLIERS_ADD,
+//           path: ROUTES.COMPANY_ADD,
+//           active: location.pathname === ROUTES.COMPANY_ADD,
 //         },
 //       ],
 //     },

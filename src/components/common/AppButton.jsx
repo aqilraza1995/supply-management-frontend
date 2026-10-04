@@ -7,6 +7,7 @@ export const AppButton = ({
   loading = false,
   disabled = false,
   startIcon,
+  onClick,
   variant = 'contained',
   color = 'primary',
   size = 'medium',
@@ -17,6 +18,7 @@ export const AppButton = ({
       variant={variant}
       color={color}
       size={size}
+      onClick={onClick}
       disabled={disabled || loading}
       startIcon={loading ? <CircularProgress size={18} color="inherit" /> : startIcon}
       {...props}

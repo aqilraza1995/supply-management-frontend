@@ -9,7 +9,7 @@ export const selectPaymentsState = (state) => state.payments.items;
 /**
  * Returns all suppliers enriched with totals, paid, remaining, and last supply date
  */
-export const selectEnrichedSuppliers = createSelector(
+export const selectEnrichedCompanies = createSelector(
   [selectSuppliersState, selectSuppliesState, selectPaymentsState],
   (suppliers, supplies, payments) => {
     return enrichSuppliersWithMetrics(suppliers, supplies, payments);
@@ -19,9 +19,9 @@ export const selectEnrichedSuppliers = createSelector(
 /**
  * Returns only suppliers with remaining amount > 0 (for Remaining Amount card link)
  */
-export const selectSuppliersWithRemainingAmount = createSelector(
-  [selectEnrichedSuppliers],
-  (enrichedSuppliers) => enrichedSuppliers.filter((s) => s.remainingAmount > 0)
+export const selectCompaniesWithRemainingAmount = createSelector(
+  [selectEnrichedCompanies],
+  (enrichedCompanies) => enrichedCompanies.filter((s) => s.remainingAmount > 0)
 );
 
 /**

@@ -4,7 +4,7 @@ import {
   selectSuppliersState,
   selectSuppliesState,
   selectPaymentsState,
-  selectEnrichedSuppliers,
+  selectEnrichedCompanies,
 } from './supplierSelectors';
 import { selectEnrichedSupplies } from './supplySelectors';
 
@@ -47,9 +47,9 @@ export const selectRecentPayments = createSelector(
  * Returns top suppliers with highest outstanding balance
  */
 export const selectTopOutstandingSuppliers = createSelector(
-  [selectEnrichedSuppliers],
-  (enrichedSuppliers) => {
-    return enrichedSuppliers
+  [selectEnrichedCompanies],
+  (enrichedCompanies) => {
+    return enrichedCompanies
       .filter((s) => s.remainingAmount > 0)
       .sort((a, b) => b.remainingAmount - a.remainingAmount)
       .slice(0, 5);

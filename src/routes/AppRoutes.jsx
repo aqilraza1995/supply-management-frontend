@@ -9,12 +9,12 @@ import MainLayout from '../components/layout/MainLayout';
 // Pages
 import Login from '../pages/auth/Login';
 import Dashboard from '../pages/dashboard/Dashboard';
-import SupplierList from '../pages/suppliers/SupplierList';
-import AddSupplier from '../pages/suppliers/AddSupplier';
-import EditSupplier from '../pages/suppliers/EditSupplier';
-import SupplierDetails from '../pages/suppliers/SupplierDetails';
+import CompanyList from '../pages/company/CompanyList';
+import AddEditCompany from '../pages/company/AddEditCompany';
+// import EditSupplier from '../pages/company/EditSupplier';
+import CompanyDetails from '../pages/company/CompanyDetails';
 import SupplyList from '../pages/supplies/SupplyList';
-import AddSupply from '../pages/supplies/AddSupply';
+import AddEditSupply from '../pages/supplies/AddEditSupply';
 import PaymentList from '../pages/payments/PaymentList';
 import AddPayment from '../pages/payments/AddPayment';
 import NotFound from '../pages/notfound/NotFound';
@@ -36,14 +36,16 @@ export const AppRoutes = () => {
           <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
 
           {/* Supplier Module */}
-          <Route path={ROUTES.SUPPLIERS} element={<SupplierList />} />
-          <Route path={ROUTES.SUPPLIERS_ADD} element={<AddSupplier />} />
-          <Route path={ROUTES.SUPPLIERS_EDIT} element={<EditSupplier />} />
-          <Route path={ROUTES.SUPPLIERS_DETAILS} element={<SupplierDetails />} />
+          <Route path={ROUTES.COMPANIES} element={<CompanyList />} />
+          <Route path={ROUTES.COMPANY_ADD} element={<AddEditCompany />} />
+          {/* <Route path={ROUTES.COMPANY_EDIT} element={<EditSupplier />} /> */}
+          <Route path={ROUTES.COMPANY_EDIT} element={<AddEditCompany />} />
+          <Route path={ROUTES.COMPANY_DETAILS} element={<CompanyDetails />} />
 
           {/* Supply Module */}
           <Route path={ROUTES.SUPPLIES} element={<SupplyList />} />
-          <Route path={ROUTES.SUPPLIES_ADD} element={<AddSupply />} />
+          <Route path={ROUTES.SUPPLIES_ADD} element={<AddEditSupply />} />
+          <Route path={ROUTES.SUPPLIES_EDIT} element={<AddEditSupply />} />
 
           {/* Payment Module */}
           <Route path={ROUTES.PAYMENTS} element={<PaymentList />} />

@@ -1,9 +1,13 @@
 import React from 'react';
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
-import IconButton from '@mui/material/IconButton';
-import SearchIcon from '@mui/icons-material/Search';
-import ClearIcon from '@mui/icons-material/Clear';
+
+//MUI Compnents
+import {TextField, InputAdornment} from "@mui/material";
+
+//icons
+import {Search,Clear} from "@mui/icons-material";
+
+// Custom Components
+import AppIconButton from './AppIconButton';
 
 export const AppSearch = ({
   value = '',
@@ -27,22 +31,20 @@ export const AppSearch = ({
         input: {
           startAdornment: (
             <InputAdornment position="start">
-              <SearchIcon fontSize="small" sx={{ color: 'text.secondary' }} />
+              <Search fontSize="small" sx={{ color: 'text.secondary' }} />
             </InputAdornment>
           ),
           endAdornment: value ? (
             <InputAdornment position="end">
-              <IconButton
-                size="small"
+              <AppIconButton
                 onClick={() => {
                   if (onClear) onClear();
                   else onChange('');
                 }}
                 edge="end"
                 aria-label="clear search"
-              >
-                <ClearIcon fontSize="small" />
-              </IconButton>
+                icon={<Clear fontSize="small" />}
+              />
             </InputAdornment>
           ) : null,
         },

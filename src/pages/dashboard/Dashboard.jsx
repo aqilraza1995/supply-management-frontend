@@ -53,10 +53,10 @@ export const Dashboard = () => {
             <Button
               variant="outlined"
               startIcon={<PersonAddIcon />}
-              onClick={() => navigate(ROUTES.SUPPLIERS_ADD)}
+              onClick={() => navigate(ROUTES.COMPANY_ADD)}
               sx={{ bgcolor: '#FFFFFF', borderColor: '#CBD5E1', color: '#334155' }}
             >
-              Add Supplier
+              Add Company
             </Button>
             <Button
               variant="outlined"
@@ -85,7 +85,7 @@ export const Dashboard = () => {
           <StatCard
             title="Total Suppliers"
             value={stats.totalSuppliers}
-            subtitle={`${stats.suppliersWithRemainingCount} with pending dues`}
+            subtitle={`${stats.companiesWithRemainingCount} with pending dues`}
             icon={PeopleAltIcon}
             color="primary"
             onClick={() => navigate(ROUTES.SUPPLIERS)}

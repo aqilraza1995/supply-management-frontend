@@ -76,7 +76,7 @@ export const SupplierDetails = () => {
         }
         breadcrumbs={[
           { label: 'Dashboard', path: ROUTES.DASHBOARD },
-          { label: 'Suppliers', path: ROUTES.SUPPLIERS },
+          { label: 'Companies', path: ROUTES.COMPANIES },
           { label: supplier.name },
         ]}
         action={
@@ -84,14 +84,14 @@ export const SupplierDetails = () => {
             <Button
               variant="outlined"
               startIcon={<ArrowBackIcon />}
-              onClick={() => navigate(ROUTES.SUPPLIERS)}
+              onClick={() => navigate(ROUTES.COMPANIES)}
             >
-              All Suppliers
+              All Copmanies
             </Button>
             <Button
               variant="outlined"
               startIcon={<EditIcon />}
-              onClick={() => navigate(`/suppliers/${supplier.id}/edit`)}
+              onClick={() => navigate(`/company/${supplier.id}/edit`)}
             >
               Edit Details
             </Button>
@@ -193,7 +193,7 @@ export const SupplierDetails = () => {
               <TableHead>
                 <TableRow>
                   <TableCell>Supply Date</TableCell>
-                  <TableCell>Category</TableCell>
+                  {/* <TableCell>Category</TableCell> */}
                   <TableCell align="right">Quantity</TableCell>
                   <TableCell align="right">Total Amount</TableCell>
                   <TableCell align="right">Amount Paid</TableCell>
@@ -212,7 +212,7 @@ export const SupplierDetails = () => {
                   suppliesWithStatus.map((supply) => (
                     <TableRow key={supply.id} hover>
                       <TableCell sx={{ fontWeight: 600 }}>{formatDate(supply.supplyDate)}</TableCell>
-                      <TableCell>
+                      {/* <TableCell>
                         <Typography variant="body2" sx={{ fontWeight: 600 }}>
                           {supply.category}
                         </Typography>
@@ -221,7 +221,7 @@ export const SupplierDetails = () => {
                             {supply.notes}
                           </Typography>
                         )}
-                      </TableCell>
+                      </TableCell> */}
                       <TableCell align="right">{`${supply.quantity} ${supply.unit}`}</TableCell>
                       <TableCell align="right" sx={{ fontWeight: 700 }}>
                         {formatCurrency(supply.totalAmount)}
@@ -348,7 +348,7 @@ export const SupplierDetails = () => {
               <TableHead>
                 <TableRow>
                   <TableCell>Supply Date</TableCell>
-                  <TableCell>Category</TableCell>
+                  {/* <TableCell>Category</TableCell> */}
                   <TableCell align="right">Previous Due</TableCell>
                   <TableCell align="right">Amount Allocated</TableCell>
                   <TableCell align="right">Balance After</TableCell>
@@ -358,7 +358,7 @@ export const SupplierDetails = () => {
                 {selectedPayment.allocations.map((alloc, idx) => (
                   <TableRow key={idx}>
                     <TableCell>{formatDate(alloc.supplyDate)}</TableCell>
-                    <TableCell sx={{ fontWeight: 600 }}>{alloc.supplyCategory || 'Supply Item'}</TableCell>
+                    {/* <TableCell sx={{ fontWeight: 600 }}>{alloc.supplyCategory || 'Supply Item'}</TableCell> */}
                     <TableCell align="right">{formatCurrency(alloc.previousBalance)}</TableCell>
                     <TableCell align="right" sx={{ fontWeight: 700, color: 'secondary.main' }}>
                       {formatCurrency(alloc.amount)}

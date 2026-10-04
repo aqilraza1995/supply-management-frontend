@@ -1,46 +1,46 @@
 import { useSelector, useDispatch } from 'react-redux';
 import {
   selectAllSuppliers,
-  addSupplier as addSupplierAction,
-  updateSupplier as updateSupplierAction,
-  deleteSupplier as deleteSupplierAction,
+  addCompany as addCompanyAction,
+  updateCompany as updateCompanyAction,
+  deleteCompany as deleteCompanyAction,
 } from '../features/suppliers/supplierSlice';
 import {
-  selectEnrichedSuppliers,
-  selectSuppliersWithRemainingAmount,
+  selectEnrichedCompanies,
+  selectCompaniesWithRemainingAmount,
   selectSupplierFullHistory,
 } from '../selectors/supplierSelectors';
 
 export const useSuppliers = () => {
   const dispatch = useDispatch();
   const suppliers = useSelector(selectAllSuppliers);
-  const enrichedSuppliers = useSelector(selectEnrichedSuppliers);
-  const suppliersWithRemaining = useSelector(selectSuppliersWithRemainingAmount);
+  const enrichedCompanies = useSelector(selectEnrichedCompanies);
+  const companiesWithRemaining = useSelector(selectCompaniesWithRemainingAmount);
 
-  const addSupplier = (supplierData) => {
-    dispatch(addSupplierAction(supplierData));
+  const addCompany = (supplierData) => {
+    dispatch(addCompanyAction(supplierData));
   };
 
-  const updateSupplier = (supplierData) => {
-    dispatch(updateSupplierAction(supplierData));
+  const updateCompany = (supplierData) => {
+    dispatch(updateCompanyAction(supplierData));
   };
 
-  const deleteSupplier = (id) => {
-    dispatch(deleteSupplierAction(id));
+  const deleteCompany = (id) => {
+    dispatch(deleteCompanyAction(id));
   };
 
-  const getSupplierById = (id) => {
+  const getCompanyById = (id) => {
     return suppliers.find((s) => String(s.id) === String(id));
   };
 
   return {
     suppliers,
-    enrichedSuppliers,
-    suppliersWithRemaining,
-    addSupplier,
-    updateSupplier,
-    deleteSupplier,
-    getSupplierById,
+    enrichedCompanies,
+    companiesWithRemaining,
+    addCompany,
+    updateCompany,
+    deleteCompany,
+    getCompanyById,
     selectSupplierFullHistory,
   };
 };
