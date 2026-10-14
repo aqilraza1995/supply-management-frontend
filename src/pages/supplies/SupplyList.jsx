@@ -1,18 +1,25 @@
 import React, { useState, useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Chip from "@mui/material/Chip";
+
+// MUI Icons
+import {
+  Box,
+  Typography,
+  Button,
+  Tooltip,
+  Tabs,
+  Tab,
+  Chip,
+} from "@mui/material";
 
 // Icons
-import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import PaymentsIcon from "@mui/icons-material/Payments";
+import {
+  AddCircleOutlined,
+  Visibility,
+  Payments,
+  Edit,
+  Delete
+} from "@mui/icons-material";
 
 import { useSupplies } from "../../hooks/useSupplies";
 import { usePagination } from "../../hooks/usePagination";
@@ -246,7 +253,15 @@ export const SupplyList = () => {
               color="primary"
               onClick={() => navigate(`/company/${row.supplierId}`)}
               aria-label="View Supplier Details"
-              icon={<VisibilityIcon fontSize="small" />}
+              icon={<Visibility fontSize="small" />}
+            />
+          </Tooltip>
+          <Tooltip title="Edit Company Ledger">
+            <AppIconButton
+              color="secondary"
+              onClick={() =>  navigate(`/supplies/${row.id}/edit`)}
+              aria-label="View Supplier Details"
+              icon={<Edit fontSize="small" />}
             />
           </Tooltip>
           {row.remainingAmount > 0 && (
@@ -259,10 +274,18 @@ export const SupplyList = () => {
                   )
                 }
                 aria-label="Make Payment"
-                icon={<PaymentsIcon fontSize="small" />}
+                icon={<Payments fontSize="small" />}
               />
             </Tooltip>
           )}
+          <Tooltip title="Delete Company Ledger">
+            <AppIconButton
+              color="error"
+              onClick={() => navigate(`/company/${row.supplierId}`)}
+              aria-label="View Supplier Details"
+              icon={<Delete fontSize="small" />}
+            />
+          </Tooltip>
         </Box>
       ),
     },
@@ -277,7 +300,7 @@ export const SupplyList = () => {
           <Button
             variant="contained"
             color="primary"
-            startIcon={<AddCircleOutlinedIcon />}
+            startIcon={<AddCircleOutlined />}
             onClick={() => navigate(ROUTES.SUPPLIES_ADD)}
           >
             Add Supply
